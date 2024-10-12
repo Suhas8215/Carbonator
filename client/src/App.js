@@ -1,0 +1,21 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
+import Display from './components/Display';
+import Details from './components/Details';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/display" element={<Display />} />
+        <Route path="/details" element={<Details />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
+
+
