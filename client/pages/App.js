@@ -1,21 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Display from './components/Display';
-import Details from './components/Details';
+// pages/_app.js
 
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/display" element={<Display />} />
-        <Route path="/details" element={<Details />} />
-      </Routes>
-    </Router>
-  );
+import '..src/styles/globals.css'; // Import your global styles
+
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />; // Render the component for the current page
 }
 
-export default App;
+export default MyApp;
 
 

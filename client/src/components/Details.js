@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 
-const Details = () => {
+export default function Details() {
   const [formData, setFormData] = useState({
     orgName: '',
     orgType: '',
@@ -10,25 +10,35 @@ const Details = () => {
     contactPerson: '',
     phoneNumber: '',
     email: ''
-  });
-
-  const router = useRouter();
+  })
+  const router = useRouter()
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
+    const { name, value } = e.target
+    setFormData(prevState => ({
       ...prevState,
       [name]: value
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Here you would typically send the data to your backend or perform other actions
+    e.preventDefault()
+    // Here you would typically send the data to your backend
+    // For this example, we'll store it in localStorage
+    const existingOrgs = JSON.parse(localStorage.getItem('organizations') || '[]')
+    const newOrg = {
+      id: Date.now(), // Use timestamp as a simple unique id
+      name: formData.orgName,
+      type: formData.orgType,
+      peopleServed: parseInt(formData.peopleServed),
+      address: formData.address
+    }
+    const updatedOrgs = [...existingOrgs, newOrg]
+    localStorage.setItem('organizations', JSON.stringify(updatedOrgs))
+    
     // Redirect to the display page after submission
-    router.push('/display'); // Adjust the path as necessary
-  };
+    router.push('/display')
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -132,7 +142,5 @@ const Details = () => {
         </div>
       </div>
     </div>
-  );
-};
-
-export default Details;
+  )
+}
